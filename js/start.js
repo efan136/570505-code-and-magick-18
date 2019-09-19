@@ -1,20 +1,20 @@
+'use strict'
 var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext('2d');
 var CLOUD_WIDTH = 420; // ширина облака и тени
 var CLOUD_HEIGHT = 270; // высота облака и тени
 var cloudX = 100; // координата облака x
 var cloudY = 10; // координата облака y
-var GAP = 10; //сдвиг тени
+var GAP = 10; // сдвиг тени
 var fontY = 40; // координата заголовка y
 var GAP_FONT = 15; // сдвиг шрифта
-var cloudColor = "white"; // цвет облака
-var shadowColor = "rgba(0, 0, 0, 0.7)"; // цвет тени
-var graphHeight = 150; // высота диаграмы
+var cloudColor = 'white'; // цвет облака
+var shadowColor = 'rgba(0, 0, 0, 0.7)'; // цвет тени
 var graphWidth = 420; // ширина диаграмы
 var collWidth = 40; // ширина колонки
 var colSpace = 50; // расстояние между колонками
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 }
