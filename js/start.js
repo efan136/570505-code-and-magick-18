@@ -31,9 +31,10 @@ var renderStatistics = function (ctx, names, times) {
   for (var i = 0; i <= times.length - 1; i++) {
     var collHeight = (graphHeight * 1000) / times[i];
     if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)'; }
-    else {
-      ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%' )'; }
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+        ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + ' % ' )';
+      }
     ctx.fillRect(cloudX + GAP + (collWidth * i) + (colSpace * i), cloudX, collWidth, collHeight);
     ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + GAP_FONT + graphHeight);
     ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), 100);
