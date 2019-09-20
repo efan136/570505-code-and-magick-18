@@ -14,7 +14,7 @@ var colSpace = 50; // расстояние между колонками
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect (x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
 var renderStatistics = function (ctx, names, times) {
@@ -31,11 +31,9 @@ var renderStatistics = function (ctx, names, times) {
   for (var i = 0; i <= times.length - 1; i++) {
     var collHeight = (graphHeight * 1000) / times[i];
     if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // покрасил  колонку ВЫ
-    }
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';}
     else {
-      ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%' )'; // не получается с
-    }
+      ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%' )';}
 
     ctx.fillRect(cloudX + GAP + (collWidth * i) + (colSpace * i), cloudX, collWidth, collHeight);
     ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + GAP_FONT + graphHeight);
