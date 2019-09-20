@@ -1,6 +1,4 @@
 'use strict';
-var canvas = document.querySelector('#canvas');
-
 var CLOUD_WIDTH = 420; // ширина облака и тени
 var CLOUD_HEIGHT = 270; // высота облака и тени
 var cloudX = 100; // координата облака x
@@ -11,23 +9,12 @@ var GAP_FONT = 15; // сдвиг шрифта
 var cloudColor = 'white'; // цвет облака
 var shadowColor = 'rgba(0, 0, 0, 0.7)'; // цвет тени
 var graphHeight = 150; // высота диаграмы
-var graphWidth = 420; // ширина диаграмы
 var collWidth = 40; // ширина колонки
 var colSpace = 50; // расстояние между колонками
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-};
-
-var getMaxElement = function (times) {
-  var maxElement = times[0];
-  for (var i = 0; i <= times.length; i++) {
-    if (times[i] > maxElement){
-      maxElement = times[i];
-    }
-  }
-  return maxElement;
+  ctx.fillRect (x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
 var renderStatistics = function (ctx, names, times) {
@@ -47,7 +34,7 @@ var renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // покрасил  колонку ВЫ
     }
     else {
-      ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%')'; // не получается с
+      ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%' )'; // не получается с
     }
 
     ctx.fillRect(cloudX + GAP + (collWidth * i) + (colSpace * i), cloudX, collWidth, collHeight);
@@ -55,4 +42,6 @@ var renderStatistics = function (ctx, names, times) {
     ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), 100);
   }
 };
+
+renderStatistics();
 
