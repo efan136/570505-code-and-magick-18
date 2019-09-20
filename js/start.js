@@ -1,6 +1,6 @@
 'use strict';
 var canvas = document.querySelector('#canvas');
-var ctx = canvas.getContext('2d');
+
 var CLOUD_WIDTH = 420; // ширина облака и тени
 var CLOUD_HEIGHT = 270; // высота облака и тени
 var cloudX = 100; // координата облака x
@@ -44,7 +44,7 @@ var renderStatistics = function (ctx, names, times) {
   for (var i = 0; i <= times.length - 1; i++) {
     var collHeight = (graphHeight * 1000) / times[i];
     if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)'; //покрасил  колонку ВЫ
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // покрасил  колонку ВЫ
     }
     else {
       ctx.fillStyle = 'hsl(120,100%,Math.round(Math.random() + 10 * i) + '%')'; // не получается с
