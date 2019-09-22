@@ -64,7 +64,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.stroke(); // отрисовка колонок
 
     ctx.fillStyle = fontColor;
-    ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight); //отрисовка имен
+    ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight); // отрисовка имен
     ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight - GAP_FONT); // отрисовка значений времени
   }
 };
