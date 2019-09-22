@@ -24,7 +24,7 @@ var renderCloud = function (ctx, x, y, color) {
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
   for (var i = 0; i <= arr.length; i++) {
-    if (arr[i] > maxElement){
+    if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
   }
@@ -52,8 +52,8 @@ window.renderStatistics = function (ctx, names, times) {
     } else {
       ctx.fillStyle = 'hsl(240,100%,' + randomColor + '%)';
       ctx.strokeStyle = 'hsl(240,100%,' + randomColor + '%)';
-
     }
+
     ctx.beginPath();
     ctx.moveTo(cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight);
     ctx.lineTo(cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight);
@@ -61,11 +61,11 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.lineTo(cloudX + GAP + (collWidth * i) + (colSpace * i) + collWidth, fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
+    ctx.stroke(); // отрисовка колонок
 
     ctx.fillStyle = fontColor;
-    ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight);
-    ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight - GAP_FONT);
+    ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight); //отрисовка имен
+    ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight - GAP_FONT); // отрисовка значений времени
   }
 };
 
