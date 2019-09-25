@@ -1,25 +1,26 @@
 'use strict';
 var CLOUD_WIDTH = 420; // ширина облака и тени
 var CLOUD_HEIGHT = 270; // высота облака и тени
-var cloudX = 100; // координата облака x
-var cloudY = 10; // координата облака y
+var CLOUD_X = 100; // координата облака x
+var CLOUD_Y = 10; // координата облака y
 var GAP = 10; // сдвиг тени
-var fontY = 40; // координата заголовка y
-var fontHeight = 17; // высота строки текста
+var FONT_Y = 40; // координата заголовка y
+var FONT_HEIGHT = 17; // высота строки текста
 var GAP_FONT = 15; // межстрочное расстояие
-var cloudColor = 'white'; // цвет облака
-var shadowColor = 'rgba(0, 0, 0, 0.7)'; // цвет тени
-var graphHeight = 150; // высота диаграмы
-var collWidth = 40; // ширина колонки
-var colSpace = 50; // расстояние между колонками
-var maxCollHeight = graphHeight - fontHeight - GAP_FONT - fontHeight; // макс высота столбцов
-var fontColor = '#000000';
-var userColor = 'rgba(255, 0, 0, 1)';
+var CLOUD_COLOR = 'white'; // цвет облака
+var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)'; // цвет тени
+var GRAPH_HEIGHT = 150; // высота диаграмы
+var COLL_WIDTH = 40; // ширина колонки
+var COLL_SPACE = 50; // расстояние между колонками
+var maxCollHeight = GRAPH_HEIGHT - FONT_HEIGHT - GAP_FONT - FONT_HEIGHT; // макс высота столбцов
+var FONT_COLOR = '#000000';
+var FONT_STYLE = 'PT Mono 16px';
+var USER_COLOR = 'rgba(255, 0, 0, 1)';
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-};
+}; //  ОБЛАКО С ТЕНЬЮ
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -29,43 +30,63 @@ var getMaxElement = function (arr) {
     }
   }
   return maxElement;
-};
+}; // МАКС ЭЛЕМЕНТ
 
-window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, cloudX + GAP, cloudY + GAP, shadowColor); // тень
-  renderCloud(ctx, cloudX, cloudY, cloudColor); // облако
+var getRandomPercent = function() {
+  var randomPercent = (Math.random() * 100);
+  return randomPercent
+}; // СЛУЧАЙНОЕ ЧИСЛО ДЛЯ ПОРКАСКИ КОЛОНОК
 
-  ctx.fillStyle = fontColor;
-  ctx.font = 'PT Mono 16px';
-  ctx.fillText('Ура вы победили!', cloudX + GAP, fontY);
-  ctx.fillText('Список результатов:', cloudX + GAP, fontY + fontHeight + GAP_FONT); // текст
+var printNames = function(ctx, arr) {
+  for (var k = 0; k <= arr.length - 1; k++) {
+    ctx.fillText(arr[k], CLOUD_X + GAP + (COLL_WIDTH * k) + (COLL_SPACE * k), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT);
+  }
+}; // ПЕЧАТЬ ИМЕН
 
-  var maxTime = getMaxElement(times);
+var getCollHeights = function(arr) {
+  var collHeights = [];
+  for (var m = 0; m <= arr.length - 1; m++) {
+    var collHeight = (maxCollHeight * arr[m]) / getMaxElement(arr);
+    collHeights.push(collHeight);
+  };
+  return collHeights;
+}; // ВЫНЕС В ОТДЕЛЬНУЮ Ф-Ю ТК ЗНАЧЕНИЕ НУЖНО В 2 МЕСТАХ - ДЛЯ ОТРИСОВКИ КОЛОНОК И ДЛЯ ПЕЧАТИ ЗНАЧЕНИЙ НАД КОЛОНКОЙ
 
+var drawGraph = function(ctx, times, names) {
   for (var i = 0; i <= times.length - 1; i++) {
-    var collHeight = (maxCollHeight * times[i]) / maxTime; // высота колонки
-    var randomColor = 100 - (Math.random() * 100); // рандомная насыщенность
-
+    getCollHeights(times)[i];
     if (names[i] === 'Вы') {
-      ctx.fillStyle = userColor;
-      ctx.strokeStyle = userColor;
+      ctx.fillStyle = USER_COLOR;
     } else {
-      ctx.fillStyle = 'hsl(240,100%,' + randomColor + '%)';
-      ctx.strokeStyle = 'hsl(240,100%,' + randomColor + '%)';
-    }
+      ctx.fillStyle = 'hsl(240,100%,' + getRandomPercent() + '%)';
+    };
 
     ctx.beginPath();
-    ctx.moveTo(cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight);
-    ctx.lineTo(cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight);
-    ctx.lineTo(cloudX + GAP + (collWidth * i) + (colSpace * i) + collWidth, fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight);
-    ctx.lineTo(cloudX + GAP + (collWidth * i) + (colSpace * i) + collWidth, fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight);
+    ctx.moveTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke(); // отрисовка колонок
+  };
+}; // отрисовка колонок
 
-    ctx.fillStyle = fontColor;
-    ctx.fillText(names[i], cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight); // отрисовка имен
-    ctx.fillText(Math.round(times[i]), cloudX + GAP + (collWidth * i) + (colSpace * i), fontY + fontHeight + GAP_FONT + fontHeight + GAP_FONT + graphHeight - fontHeight - collHeight - GAP_FONT); // отрисовка значений времени
-  }
+var printTimes = function(ctx, arr, color) {
+  ctx.fillStyle = FONT_COLOR;
+  for (var j = 0; j <= arr.length - 1; j++) {
+    ctx.fillText(Math.round(arr[j]), CLOUD_X + GAP + (COLL_WIDTH * j) + (COLL_SPACE * j), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(arr)[j] - GAP_FONT);
+  };
+}; // отрисовка значений времени
+
+window.renderStatistics = function (ctx, names, times) {
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, SHADOW_COLOR); // тень
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR); // облако
+  ctx.fillStyle = FONT_COLOR;
+  ctx.font = FONT_STYLE;
+  ctx.fillText('Ура вы победили!', CLOUD_X + GAP, FONT_Y);
+  ctx.fillText('Список результатов:', CLOUD_X + GAP, FONT_Y + FONT_HEIGHT + GAP_FONT); // текст
+  printNames(ctx, names); // ПЕЧАТЬ ИМЕН
+  drawGraph(ctx, times, names); // ОТРИСОВКА КОЛОНКИ
+  printTimes(ctx, times); // ПЕЧАТЬ ЗНАЧЕНИЯ НАД КОЛОНКОЙ
 };
 
