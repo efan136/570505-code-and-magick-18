@@ -53,9 +53,7 @@ var getCollHeights = function (arr) {
 }; // ВЫНЕС В ОТДЕЛЬНУЮ Ф-Ю ТК ЗНАЧЕНИЕ НУЖНО В 2 МЕСТАХ - ДЛЯ ОТРИСОВКИ КОЛОНОК И ДЛЯ ПЕЧАТИ ЗНАЧЕНИЙ НАД КОЛОНКОЙ
 
 var drawGraph = function (ctx, times, names) {
-  var collHeightsArray = getCollHeights(times);
   for (var i = 0; i <= times.length - 1; i++) {
-    collHeightsArray[i];
     if (names[i] === 'Вы') {
       ctx.fillStyle = USER_COLOR;
     } else {
@@ -64,13 +62,13 @@ var drawGraph = function (ctx, times, names) {
 
     ctx.beginPath();
     ctx.moveTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
-    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - collHeightsArray[i]);
-    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - collHeightsArray[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
     ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
     ctx.closePath();
     ctx.fill();
-  };
-} // отрисовка колонок
+  }
+}; // отрисовка колонок
 
 var printTimes = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
