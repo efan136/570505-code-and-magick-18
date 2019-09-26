@@ -38,15 +38,15 @@ var getRandomPercent = function () {
 }; // СЛУЧАЙНОЕ ЧИСЛО ДЛЯ ПОРКАСКИ КОЛОНОК
 
 var printNames = function (ctx, arr) {
-  for (var k = 0; k <= arr.length - 1; k++) {
-    ctx.fillText(arr[k], CLOUD_X + GAP + (COLL_WIDTH * k) + (COLL_SPACE * k), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT);
+  for (var i = 0; i <= arr.length - 1; i++) {
+    ctx.fillText(arr[i], CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT);
   }
 }; // ПЕЧАТЬ ИМЕН
 
 var getCollHeights = function (arr) {
   var collHeights = [];
-  for (var m = 0; m <= arr.length - 1; m++) {
-    var collHeight = (maxCollHeight * arr[m]) / getMaxElement(arr);
+  for (var i = 0; i <= arr.length - 1; i++) {
+    var collHeight = (maxCollHeight * arr[i]) / getMaxElement(arr);
     collHeights.push(collHeight);
   }
   return collHeights;
@@ -61,10 +61,14 @@ var drawGraph = function (ctx, times, names) {
     }
 
     ctx.beginPath();
-    ctx.moveTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
-    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
-    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
-    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH, FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
+    ctx.moveTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
+              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
+              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH,
+              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+    ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH,
+              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
     ctx.closePath();
     ctx.fill();
   }
@@ -72,8 +76,8 @@ var drawGraph = function (ctx, times, names) {
 
 var printTimes = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
-  for (var j = 0; j <= arr.length - 1; j++) {
-    ctx.fillText(Math.round(arr[j]), CLOUD_X + GAP + (COLL_WIDTH * j) + (COLL_SPACE * j), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(arr)[j] - GAP_FONT);
+  for (var i = 0; i <= arr.length - 1; i++) {
+    ctx.fillText(Math.round(arr[i]), CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(arr)[i] - GAP_FONT);
   }
 }; // отрисовка значений времени
 
