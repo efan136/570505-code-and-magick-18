@@ -62,13 +62,13 @@ var drawGraph = function (ctx, times, names) {
 
     ctx.beginPath();
     ctx.moveTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
-              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
     ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
-              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
     ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH,
-              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(times)[i]);
     ctx.lineTo(CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i) + COLL_WIDTH,
-              FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT);
     ctx.closePath();
     ctx.fill();
   }
