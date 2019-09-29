@@ -34,7 +34,7 @@ var getMaxElement = function (arr) {
 };
 
 var getRandomNumber = function () {
-  var randomNumber = (Math.random() * 100);
+  var randomNumber = Math.round(Math.random() * 100);
   return randomNumber;
 };
 
