@@ -42,10 +42,10 @@ var printHeading = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
   ctx.font = FONT_STYLE;
   for (var i = 0; i <= arr.length - 1; i++) {
-    if(i < 1) {
+    if (i < 1) {
       ctx.fillText(arr[i], CLOUD_X + GAP, FONT_Y);
-    }
-    else {ctx.fillText(arr[i], CLOUD_X + GAP, FONT_Y + (FONT_HEIGHT * i) + (GAP_FONT * i));
+    } else {
+      ctx.fillText(arr[i], CLOUD_X + GAP, FONT_Y + (FONT_HEIGHT * i) + (GAP_FONT * i));
     }
   }
 };
