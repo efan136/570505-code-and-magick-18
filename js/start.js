@@ -16,7 +16,7 @@ var maxCollHeight = GRAPH_HEIGHT - FONT_HEIGHT - GAP_FONT - FONT_HEIGHT; // ма
 var FONT_COLOR = '#000000';
 var FONT_STYLE = 'PT Mono 16px';
 var USER_COLOR = 'rgba(255, 0, 0, 1)';
-var headingLines = ['Ура вы победили!', 'Список результатов:'];
+var HEADING_LINES = ['Ура вы победили!', 'Список результатов:'];
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -33,8 +33,8 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var getRandomNumber = function () {
-  var randomNumber = Math.round(Math.random() * 100);
+var getRandomNumber = function (maxNumber) {
+  var randomNumber = Math.floor(1 + Math.random() * maxNumber);
   return randomNumber;
 };
 
@@ -42,7 +42,7 @@ var printHeading = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
   ctx.font = FONT_STYLE;
   for (var i = 0; i <= arr.length - 1; i++) {
-    if (i < 1) {
+    if (i === 1) {
       ctx.fillText(arr[i], CLOUD_X + GAP, FONT_Y);
     } else {
       ctx.fillText(arr[i], CLOUD_X + GAP, FONT_Y + (FONT_HEIGHT * i) + (GAP_FONT * i));
@@ -53,7 +53,9 @@ var printHeading = function (ctx, arr) {
 var printTimes = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
   for (var i = 0; i <= arr.length - 1; i++) {
-    ctx.fillText(Math.round(arr[i]), CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(arr)[i] - GAP_FONT);
+    ctx.fillText(Math.round(arr[i]),
+        CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT - FONT_HEIGHT - getCollHeights(arr)[i] - GAP_FONT);
   }
 };
 
@@ -66,12 +68,12 @@ var getCollHeights = function (arr) {
   return collHeights;
 };
 
-var drawGraph = function (ctx, times, names) {
+var drawGraphs = function (ctx, times, names) {
   for (var i = 0; i <= times.length - 1; i++) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = USER_COLOR;
     } else {
-      ctx.fillStyle = 'hsl(240,100%,' + getRandomNumber() + '%)';
+      ctx.fillStyle = 'hsl(240,100%,' + getRandomNumber(100) + '%)';
     }
 
     ctx.beginPath();
@@ -91,15 +93,17 @@ var drawGraph = function (ctx, times, names) {
 var printNames = function (ctx, arr) {
   ctx.fillStyle = FONT_COLOR;
   for (var i = 0; i <= arr.length - 1; i++) {
-    ctx.fillText(arr[i], CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i), FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT);
+    ctx.fillText(arr[i],
+        CLOUD_X + GAP + (COLL_WIDTH * i) + (COLL_SPACE * i),
+        FONT_Y + FONT_HEIGHT + GAP_FONT + FONT_HEIGHT + GAP_FONT + GRAPH_HEIGHT);
   }
 };
 
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, SHADOW_COLOR);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
-  printHeading(ctx, headingLines);
+  printHeading(ctx, HEADING_LINES);
   printNames(ctx, names);
-  drawGraph(ctx, times, names);
+  drawGraphs(ctx, times, names);
   printTimes(ctx, times);
 };
